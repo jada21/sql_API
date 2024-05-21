@@ -60,6 +60,10 @@ global count
 count = 1
 time_sent = datetime.now()
 
+@app.get("/", status_code=200)  
+async def welcome(request: Request):
+    return ("jadas cool capstone")
+
 @app.post("/data", status_code=201)
 async def post_data(request: Request):
     data_object = await request.json()
@@ -73,7 +77,7 @@ async def post_data(request: Request):
     sql = "INSERT INTO Sensor_Data2 (lat, lng, temp, time, message) VALUES ( %s, %s, %s, %s, %s)"
     current_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     current_time_dto = datetime.now()
-    message_data = "HELP! " + "\nLat: " + str_lat + "\nLng: " + str_lng + "\nTemp: " + str_temp + "\nLink: " + "http://3.145.165.110/SheButtonJC.html "      #will only concatenate if data is posted as string
+    message_data = "HELP! " + "\nLat: " + str_lat + "\nLng: " + str_lng + "\nTemp: " + str_temp + "\nLink: " + "http://3.145.165.110/SheButtonJC.html"      #will only concatenate if data is posted as string
     val = (lat_input, lng_input, temp_input, current_time, message_data)
     cursor.execute(sql, val)
     my_db.commit()
@@ -133,6 +137,11 @@ async def get_data(request: Request):
     status_flag = None
     return {"status": status_grab}
    
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
 # finally:
 #     if 'my_db' in locals() and my_db.is_connected():
 #         my_db.close()
