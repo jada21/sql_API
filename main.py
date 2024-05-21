@@ -62,7 +62,7 @@ time_sent = datetime.now()
 
 @app.get("/", status_code=200)  
 async def welcome(request: Request):
-    return ("jadas cool capstone")
+    return ("hi this is a test")
 
 @app.post("/data", status_code=201)
 async def post_data(request: Request):
