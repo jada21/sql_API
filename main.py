@@ -118,7 +118,7 @@ async def post_data(request: Request):
         if response1.status_code == 200 and response2.status_code == 200:
             status_flag = 1
         else:
-            status_flag = 0         #this part aint working fam....................................................
+            status_flag = 0        
     
     count += 1
     return ("201 created")
