@@ -2,7 +2,6 @@ from fastapi import FastAPI, Body, Request, HTTPException, status
 from fastapi.responses import Response, JSONResponse
 from dotenv import load_dotenv
 import os
-import pymysql
 import mysql.connector
 import requests
 import json
@@ -14,13 +13,13 @@ load_dotenv()
 db_password = os.getenv("db_password")
 
 # Database connection details
-host = '3.145.165.110'
+host = '3.145.165.110'              #should put this in the .env
 port = 3306                         # Default MySQL port
 user = 'root'
 password = db_password
 database = 'SheButton_Data'
 
-apiKey = "9704054"
+apiKey = "9704054"                  #should put this in the .env
 phoneNum = "18765883488"
 apiKey2 = "1582004"
 phoneNum2 = "18763081860"
@@ -62,7 +61,7 @@ time_sent = datetime.now()
 
 @app.get("/", status_code=200)  
 async def welcome(request: Request):
-    return ("hi this is a test")
+    return ("jadas supa cool capstone")
 
 @app.post("/data", status_code=201)
 async def post_data(request: Request):
@@ -77,7 +76,7 @@ async def post_data(request: Request):
     sql = "INSERT INTO Sensor_Data2 (lat, lng, temp, time, message) VALUES ( %s, %s, %s, %s, %s)"
     current_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     current_time_dto = datetime.now()
-    message_data = "HELP! " + "\nLat: " + str_lat + "\nLng: " + str_lng + "\nTemp: " + str_temp + "\nLink: " + "http://3.145.165.110/SheButtonJC.html"      #will only concatenate if data is posted as string
+    message_data = "HELP! " + "\nLat: " + str_lat + "\nLng: " + str_lng + "\nTemp: " + str_temp + "\nLink: " + "http://3.145.165.110/index.html"    #will only concatenate if data is posted as string
     val = (lat_input, lng_input, temp_input, current_time, message_data)
     cursor.execute(sql, val)
     my_db.commit()
